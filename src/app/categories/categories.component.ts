@@ -3,11 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CategoriesService } from '../services/categories.service';
 import { Category } from '../models/category';
-
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-categories',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [RouterLink,FormsModule, CommonModule],
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css'],
 })

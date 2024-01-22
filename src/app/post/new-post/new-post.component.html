@@ -1,0 +1,204 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h3 class="text-theme-primary">Add new post</h3>
+      <p class="mb-5">You can add your new post here.</p>
+    </div>
+  </div>
+
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-7">
+        <div class="card shadow-effect">
+          <div class="card-body">
+            <label for="title">Title</label>
+            <input
+              formControlName="Title"
+              type="text"
+              id="title"
+              class="form-control"
+              placeholder="Add title"
+            />
+
+            <div
+              *ngIf="
+                postForm.get('Title')?.errors && postForm.get('Title')?.touched
+              "
+            >
+              <div
+                *ngIf="postForm.get('Title')?.invalid"
+                class="alert alert-danger"
+              >
+                Title is required
+              </div>
+            </div>
+            <div
+              *ngIf="
+                postForm.get('Title')?.errors && postForm.get('Title')?.touched
+              "
+            >
+              <div
+                *ngIf="postForm.get('Title')?.errors?.['minlength']"
+                class="alert alert-danger"
+              >
+                Title must be at least 10 characters long
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <label for="Perma_link">Permalink</label>
+            <input
+              formControlName="perma_link"
+              type="text"
+              id="Perma_link"
+              class="form-control"
+              name="Permalink"
+            />
+            <div
+              *ngIf="
+                postForm.get('perma_link')?.errors && postForm.get('perma_link')?.touched
+              "
+            >
+              <div
+                *ngIf="postForm.get('perma_link')?.invalid"
+                class="alert alert-danger"
+              >
+                Title is required
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <label for="Excerpt">Excerpt</label>
+            <textarea
+              formControlName="excert"
+              id="Excerpt"
+              cols="30"
+              rows="10"
+              class="form-control"
+              placeholder="Add text here"
+            ></textarea>
+            <div
+              *ngIf="
+                postForm.get('excert')?.errors && postForm.get('excert')?.touched
+              "
+            >
+              <div
+                *ngIf="postForm.get('excert')?.invalid"
+                class="alert alert-danger"
+              >
+                Title is required
+              </div>
+            </div>
+            <div
+              *ngIf="
+                postForm.get('excert')?.errors && postForm.get('excert')?.touched
+              "
+            >
+              <div
+                *ngIf="postForm.get('excert')?.errors?.['minlength']"
+                class="alert alert-danger"
+              >
+                Excert must be at least 50 characters long
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 mt-3">
+        <div class="form-group">
+          <label for="Select">Please select a post category</label>
+          <select
+            formControlName="Category_"
+            name=""
+            id="Select"
+            class="form-control"
+          >
+            <option value="" disabled>Select Category</option>
+            <option
+              *ngFor="let cate of categories"
+              value="{{cate.id}}-{{cate.data.category}}"
+            >
+              {{ cate.data.category }}
+            </option>
+          </select>
+          <div
+              *ngIf="
+                postForm.get('Category_')?.errors && postForm.get('Category_')?.touched
+              "
+            >
+              <div
+                *ngIf="postForm.get('Category_')?.invalid"
+                class="alert alert-danger"
+              >
+              Category is required
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <label for="image"></label>
+          <img
+            [src]="imgSrc"
+            alt="Preview"
+            class="form-control img-fluid img-preview"
+          />
+          <input
+            formControlName="post_Img"
+            type="file"
+            name=""
+            id="image"
+            class="form-control"
+            accept="image/*"
+            (change)="Preview($event)"
+          />
+          <div
+              *ngIf="
+                postForm.get('post_Img')?.errors && postForm.get('post_Img')?.touched
+              "
+            >
+              <div
+                *ngIf="postForm.get('post_Img')?.invalid"
+                class="alert alert-danger"
+              >
+              post imgage is required
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-3 mb-5">
+      <div class="col-md-12">
+        <div class="card shadow-effect">
+          <div class="card-body">
+            <div class="form-group ">
+              <label>Content</label>
+              <angular-editor 
+                formControlName="content"
+                placeholder="Enter text here..."
+              ></angular-editor>
+              <div
+              *ngIf="
+                postForm.get('content')?.errors && postForm.get('content')?.touched
+              "
+            >
+              <div
+                *ngIf="postForm.get('content')?.invalid"
+                class="alert alert-danger"
+              >
+              content is required
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 text-center mt-5 mb-3">
+        <button class="btn btn-info bg-theme" type="submit" [disabled]="postForm.invalid">Save Post</button>
+        <button class="btn btn-warning bg-theme ms-3" routerLink="/posts">
+          Back to post
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
