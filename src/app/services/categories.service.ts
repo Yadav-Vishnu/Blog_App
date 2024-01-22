@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, collectionData, collection, addDoc , query, getDocs, doc, updateDoc} from '@angular/fire/firestore';
+import { Firestore, collectionData, collection, addDoc , query, getDocs, doc, updateDoc, deleteDoc} from '@angular/fire/firestore';
 
 
 
@@ -39,6 +39,16 @@ export class CategoriesService {
       console.log('Category updated with ID: ', id);
     } catch (e) {
       console.error('Error updating document: ', e);
+    }
+  }
+
+  async deleteData(id: string) {
+    try {
+      const docRef = doc(this.firestore, 'categories', id);
+      await deleteDoc(docRef);
+      console.log('Category deleted with ID: ', id);
+    } catch (e) {
+      console.error('Error deleting document: ', e);
     }
   }
   
