@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule} from '@angular/common/http';
 import { Post } from '../../modules/post';
+import { PostService } from '../../services/post.service';
 @Component({
   selector: 'app-new-post',
   standalone: true,
@@ -25,8 +26,8 @@ export class NewPostComponent {
   postForm:FormGroup;
 
 
-  constructor(private categoriesService: CategoriesService,private fb: FormBuilder) {
-    
+  constructor(private categoriesService: CategoriesService,private fb: FormBuilder,private file_path:PostService) {
+    // console.log(this.file_path.uploadImag(""));
     this.load_cate();
     this.postForm = this.fb.group({
       Title: ['', [Validators.required,Validators.minLength(10)]],
@@ -41,12 +42,12 @@ export class NewPostComponent {
       const permalink = title ? title.replaceAll(' ', '-'):'';
       this.postForm.get('perma_link')?.setValue(permalink);
     });
-    this.postForm.get('perma_link')?.disable();
+    // this.postForm.get('perma_link')?.disable();
 
  
   }
 
-  // postForm.get('perma_link')?.disable();
+  
   
 
   async load_cate() {
@@ -75,14 +76,14 @@ export class NewPostComponent {
 
 
   onSubmit(){
-
+    // selected_img: File
   //   const permalink = this.postForm.value.title ? this.postForm.value.perma_link : '';
   // this.postForm.get('perma_link')?.setValue(permalink);
    
     // console.log(this.postForm.value);
     let spleted =this.postForm.value.Category_.split('-');
     const postData:Post = {
-      title: this.postForm.value.title,
+      title: this.postForm.value.Title,
       permlink:this.postForm.value.perma_link,
       catogory:{
         categoryId:spleted[0],
@@ -96,10 +97,12 @@ export class NewPostComponent {
       status:'new',
       created: new Date()
     };
-   
+    
+
     // console.log(postData);
-    this.postForm.reset();
+    this.file_path.uploadImag(this.SelectedImag,postData)
     this.imgSrc ='./assets/preview.png';
+    this.postForm.reset();
   }
   
 }

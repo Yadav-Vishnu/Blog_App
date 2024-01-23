@@ -45,7 +45,7 @@
               </div>
             </div>
           </div>
-          <div class="card-body">
+          <div class="card-body" style="pointer-events: none;">
             <label for="Perma_link">Permalink</label>
             <input
               formControlName="perma_link"
@@ -53,19 +53,9 @@
               id="Perma_link"
               class="form-control"
               name="Permalink"
+              readonly
             />
-            <div
-              *ngIf="
-                postForm.get('perma_link')?.errors && postForm.get('perma_link')?.touched
-              "
-            >
-              <div
-                *ngIf="postForm.get('perma_link')?.invalid"
-                class="alert alert-danger"
-              >
-                Title is required
-              </div>
-            </div>
+          
           </div>
           <div class="card-body">
             <label for="Excerpt">Excerpt</label>
@@ -141,6 +131,8 @@
             [src]="imgSrc"
             alt="Preview"
             class="form-control img-fluid img-preview"
+
+            
           />
           <input
             formControlName="post_Img"

@@ -4,8 +4,8 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { initializeApp } from "firebase/app";
-import {environment } from '../environments/environment.development';
+// import { initializeApp } from "firebase/app";
+// import {environment } from '../environments/environment.development';
 // import { Firestore} from '@angular/fire/firestore';
 import {CategoriesComponent} from './categories/categories.component';
 // import { RouterLink } from '@angular/router';
@@ -19,5 +19,5 @@ import {CategoriesComponent} from './categories/categories.component';
 })
 export class AppComponent {
   title = 'ang-blog-dashboard';
-  app = initializeApp(environment.firebaseConfig);
+  // app = initializeApp(environment.firebaseConfig);
 }

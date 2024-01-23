@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, collectionData, collection, addDoc , query, getDocs, doc, updateDoc, deleteDoc} from '@angular/fire/firestore';
+import { Firestore, collection, addDoc , query, getDocs, doc, updateDoc, deleteDoc} from '@angular/fire/firestore';
 
 
 
@@ -7,7 +7,7 @@ import { Firestore, collectionData, collection, addDoc , query, getDocs, doc, up
   providedIn: 'root'
 })
 export class CategoriesService {
-  firestore: Firestore = inject(Firestore);
+ private firestore: Firestore = inject(Firestore);
   
   constructor() { }
 
