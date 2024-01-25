@@ -1,14 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
 import { Post } from '../modules/post';
-import { Firestore, addDoc, collection } from 'firebase/firestore';
+import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
   private storage: Storage = inject(Storage);
-  private firestore: Firestore = inject(Firestore);
+  // private firestore!: Firestore ;
+   firestore: Firestore = inject(Firestore);
   constructor() { }
 
   async uploadImag(selected_img: File,postData:Post) {
@@ -35,19 +36,31 @@ export class PostService {
       const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
       postData.postImgPath = downloadURL;
       
-      console.log(postData);
+      // console.log(postData);
     } catch (error) {
       console.error('Upload failed:', error);
     }
 
+      this.saveData(postData)
+    // try {
+    //   const docRef = await addDoc(collection(this.firestore, 'post'), postData);
+    //   console.log('New category added with ID: ', docRef.id);
+      
+    // } catch (e) {
+    //   console.error('Error adding document: ', e);
+    // }
+
+   
+  }
+
+  async saveData(postData:Post){
     try {
+      console.log("HI kaustubh",this.firestore);
       const docRef = await addDoc(collection(this.firestore, 'post'), postData);
       console.log('New category added with ID: ', docRef.id);
       
     } catch (e) {
       console.error('Error adding document: ', e);
     }
-
-   
   }
 }
