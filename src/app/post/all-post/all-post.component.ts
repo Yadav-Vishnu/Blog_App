@@ -12,7 +12,7 @@ import {PostService} from '../../services/post.service';
 })
 export class AllPostComponent {
   loaded_post!:Array<any>;
-  constructor(private Post_services:PostService){
+  constructor(public Post_services:PostService){
      
     this.load_data();
     
@@ -21,7 +21,7 @@ export class AllPostComponent {
   async load_data(){
       try {
           this.loaded_post = await this.Post_services.loadData();
-          console.log(this.loaded_post);
+          // console.log(this.loaded_post);
           
       } catch (error) {
         
@@ -30,4 +30,14 @@ export class AllPostComponent {
         
       }
   }
+
+  async onDelete(path: string, id: string) {
+    try {
+      await this.Post_services.delete_img(path, id);
+      await this.load_data();
+    } catch (error) {
+      console.error('Error deleting image: ', error);
+    }
+  }
+  
 }

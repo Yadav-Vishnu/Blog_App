@@ -4,6 +4,8 @@ import {
   ref,
   uploadBytesResumable,
   getDownloadURL,
+  getStorage,
+  deleteObject,
 } from '@angular/fire/storage';
 import { Post } from '../modules/post';
 import {
@@ -15,13 +17,14 @@ import {
   updateDoc,
   doc,
   getDoc,
+  deleteDoc,
 } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PostService {
+ export class  PostService {
   private storage: Storage = inject(Storage);
   // private firestore!: Firestore ;
   firestore: Firestore = inject(Firestore);
@@ -108,4 +111,34 @@ export class PostService {
       throw new Error('No such document!');
     }
   }
+
+ 
+async delete_img(imageUrl: string,id:string) {
+  
+  const imageRef = ref(this.storage, imageUrl);
+
+  try {
+    await deleteObject(imageRef);
+    // console.log('Image deleted successfully');
+    this.delete_post(id);
+  //  const val = await this.loadData();
+  } catch (error) {
+    console.error('Error deleting image: ', error);
+  }
+}
+
+
+  async delete_post(id:string){
+    try {
+      const docRef = doc(this.firestore, 'post', id);
+     
+      await deleteDoc(docRef);
+      
+     
+      // console.log('Category deleted with ID: ', id);
+    } catch (e) {
+      console.error('Error deleting document: ', e);
+    }
+  }
+  
 }
