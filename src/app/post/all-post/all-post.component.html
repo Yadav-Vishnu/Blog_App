@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-effect bg-secondary-theme">
+                <div class="body text-center  mt-3 mb-4">
+                    <h3 class="text-theme-center ">All Blog Posts</h3>
+                    <p> From here you can manage your blog posts.</p>
+                    <button class="btn btn-info bg-theme" routerLink = '/posts/new'>Add New Post</button>
+                    <button class="btn btn-warning ms-2" routerLink = '/'>Back to dashbord</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-effect">
+                <div class="card-body ">
+                    <table class="table  align-middle table-hover">
+                        <thead  class="table-light">
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Post Image</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Excerpt</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="table-group-divider">
+                            <tr *ngFor="let post of loaded_post; index as i">
+                                <td  scope="row">{{i+1}}</td>
+                                <td style="width: 200px;"><img src="{{post.data.postImgPath
+                                }}" alt="post img" class="img img-fluid"></td>
+                                <td >{{post.data.title}}</td>
+                                <td style="width: 300px;" >{{post.data.excert}}</td>
+                                <td>{{post.data.catogory.category}}</td>
+                                <td>{{post.data.created.toMillis() | date}}</td>
+                                <td>
+                                    <button class="btn btn-warning btn-sm" routerLink="/posts/new" [queryParams]="{id:post.id}">Edit Post</button>
+                                    <!-- <button class="btn btn-danger btn-sm">Delete</button> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

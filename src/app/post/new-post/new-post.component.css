@@ -1,0 +1,11 @@
+input,textarea{
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0px;
+}
+
+.img-preview{
+    max-height:200px;
+    max-width: 200px;
+
+}
