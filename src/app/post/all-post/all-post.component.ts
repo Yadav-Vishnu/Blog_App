@@ -14,7 +14,9 @@ export class AllPostComponent {
   loaded_post!:Array<any>;
   constructor(public Post_services:PostService){
      
-    this.load_data();
+    this.load_data().then(()=>{
+      return ;
+    });
     
   }
 
@@ -38,6 +40,18 @@ export class AllPostComponent {
     } catch (error) {
       console.error('Error deleting image: ', error);
     }
+  }
+
+ async is_Featured(id:string,status:boolean){
+    const post_data = await  this.Post_services.one_data(id);
+    // console.log(post_data);
+    if(post_data.data){
+      post_data.data['isFeatured'] = status;
+      await this.Post_services.update_Data(id,post_data.data);
+    }
+    await this.load_data();
+   
+    
   }
   
 }

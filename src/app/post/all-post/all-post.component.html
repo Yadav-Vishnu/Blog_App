@@ -22,7 +22,7 @@
                                 <th scope="col">No</th>
                                 <th scope="col">Post Image</th>
                                 <th scope="col">Title</th>
-                                <th scope="col">Excerpt</th>
+                                <!-- <th scope="col">Excerpt</th> -->
                                 <th scope="col">Category</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Actions</th>
@@ -35,12 +35,14 @@
                                 <td style="width: 200px;"><img src="{{post.data.postImgPath
                                 }}" alt="post img" class="img img-fluid"></td>
                                 <td >{{post.data.title}}</td>
-                                <td style="width: 300px;" >{{post.data.excert}}</td>
+                                <!-- <td style="width: 300px;" >{{post.data.excert}}</td> -->
                                 <td>{{post.data.catogory.category}}</td>
                                 <td>{{post.data.created.toMillis() | date}}</td>
                                 <td>
                                     <button class="btn btn-warning btn-sm" routerLink="/posts/new" [queryParams]="{id:post.id}">Edit Post</button>
                                     <button class="btn btn-danger btn-sm ms-2" (click)="onDelete(post.data.postImgPath,post.id)">Delete</button>
+                                    <button *ngIf='!post.data.isFeatured' (click)="is_Featured(post.id,true)" class="btn btn-sm ms-2 btn-success">Mark Featured</button>
+                                    <button *ngIf='post.data.isFeatured' (click)="is_Featured(post.id,false)" class="btn btn-sm ms-2 btn-info">Remove Featured</button>
                                 </td>
                             </tr>
                         </tbody>
