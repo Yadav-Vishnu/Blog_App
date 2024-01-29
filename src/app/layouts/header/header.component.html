@@ -4,4 +4,11 @@
             ANG-BLOG
         </a>
     </div>
+    <div  *ngIf="isLoggedIn$ | async" class="container justify-content-center"> <!--*ngIf="isLoggedIn$ | async" this async pipe is used to continue watch isLoggedIn$ -->
+        <a href="#" class="me-3">
+            {{user_email}}
+        </a>
+        <button class="btn btn-sm btn-info bg-secondary-theme text-teme-primary" (click)="logout()">Logout</button>
+        <!-- <button *ngIf="user_email==''" class="btn btn-sm btn-info bg-secondary-theme text-teme-primary" (click)="logout()">SignIn</button> -->
+    </div>
 </header>
