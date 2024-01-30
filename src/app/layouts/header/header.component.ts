@@ -22,9 +22,9 @@ export class HeaderComponent implements OnInit {
     if (user) {
       // console.log(JSON.parse(user).email);
       this.isLoggedIn$ =  this.auth.isLoggedIn();
-      console.log(this.isLoggedIn$);
+      // console.log(this.isLoggedIn$);
       this.user_email = JSON.parse(user).email;
-     console.log('Hi i m inside the user data.');
+    //  console.log('Hi i m inside the user data.');
      
      
     } else {

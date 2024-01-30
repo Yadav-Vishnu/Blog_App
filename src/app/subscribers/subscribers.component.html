@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-effect bg-secondary-theme">
+                <div class="body text-center  mt-3 mb-4">
+                    <h3 class="text-theme-center ">All Subscribers</h3>
+                    <p> From here you can manage your Subscribers.</p>
+                    <!-- <button class="btn btn-info bg-theme" routerLink = '/posts/new'>Add New Post</button> -->
+                    <button class="btn btn-warning ms-2" routerLink = '/'>Back to dashbord</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-effect">
+                <div class="card-body ">
+                    <table class="table  align-middle table-hover">
+                        <thead  class="table-light">
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <!-- <th scope="col">Excerpt</th> -->
+                                <!-- <th scope="col">Category</th>
+                                <th scope="col">Date</th> -->
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="table-group-divider">
+                            <tr *ngFor="let sub of subscriber;index as i">
+                                <td  scope="row">{{i+1}}</td>
+                              
+                                <td >{{sub.data.name}}</td>
+                                <!-- <td style="width: 300px;" >{{post.data.excert}}</td> -->
+                                <td>{{sub.data.email}}</td>
+                                <!-- <td>{{post.data.created.toMillis() | date}}</td> -->
+                                <td>
+                                    <!-- <button class="btn btn-warning btn-sm" routerLink="/posts/new" [queryParams]="{id:post.id}">Edit Post</button> -->
+                                    <button class="btn btn-danger btn-sm ms-2" (click)="onDelete(sub.id)">Delete</button>
+                                    <!-- <button *ngIf='!post.data.isFeatured' (click)="is_Featured(post.id,true)" class="btn btn-sm ms-2 btn-success">Mark Featured</button>
+                                    <button *ngIf='post.data.isFeatured' (click)="is_Featured(post.id,false)" class="btn btn-sm ms-2 btn-info">Remove Featured</button> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
